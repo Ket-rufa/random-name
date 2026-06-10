@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+/* ====================================================
+   Tailwind v4: Configure class-based dark mode
+   This tells Tailwind to activate dark: variant when
+   .dark class is present on any ancestor element.
+   ==================================================== */
+@variant dark (&:where(.dark, .dark *));
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+@theme {
+  --color-primary-50: #f5f3ff;
+  --color-primary-100: #edd8ff;
+  --color-primary-200: #ddbaff;
+  --color-primary-300: #c28cff;
+  --color-primary-400: #a254ff;
+  --color-primary-500: #851cff;
+  --color-primary-600: #6d07eb;
+  --color-primary-700: #5700cf;
+  --color-primary-800: #4800b0;
+  --color-primary-900: #3c0091;
+  --color-primary-950: #230061;
+
+  --animate-spin-slow: spin 20s linear infinite;
+  --font-sans: 'Outfit', 'Inter', 'system-ui', 'sans-serif';
+}
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 transition-colors duration-300 font-sans antialiased overflow-x-hidden;
+  }
+
+  html.dark body {
+    @apply bg-slate-950 text-slate-100;
+  }
+}
+
+/* Glassmorphism utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.dark .glass {
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 dark:bg-slate-700 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-400 dark:bg-slate-600;
+}
+
+/* Layout utilities */
+.content-height {
+  height: calc(100vh - 4rem);
+}
+
+/* Smooth color transitions on theme change */
+*, *::before, *::after {
+  transition-property: background-color, border-color, color;
+  transition-duration: 0.25s;
+  transition-timing-function: ease;
+}
+
+/* Exclude animations from the global transition override */
+.animate-spin, .animate-ping, .animate-pulse, .animate-bounce,
+[class*="animate-"] {
+  transition: none;
+}
