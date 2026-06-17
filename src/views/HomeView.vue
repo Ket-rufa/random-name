@@ -27,7 +27,7 @@
     </div>
 
     <!-- Victory Result Modal -->
-    <BaseModal :is-open="store.isResultModalOpen" @close="closeResultModal" size="sm">
+    <BaseModal :is-open="store.isResultModalOpen" @close="closeResultModal" size="sm" :header-color="winnerColor">
       <template #title>
         <div class="text-center w-full">🎉 KẾT QUẢ</div>
       </template>
