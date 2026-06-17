@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800/60 shadow-sm overflow-hidden p-5 max-h-[300px] flex-shrink-0 transition-all duration-300">
+  <div class="flex flex-col bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800/60 shadow-sm overflow-hidden p-5 max-h-[300px] shrink-0 transition-all duration-300">
     <div class="flex items-center justify-between mb-3.5">
       <h3 class="text-sm font-bold text-slate-850 dark:text-slate-200 flex items-center gap-2">
         <HistoryIcon class="h-4.5 w-4.5 text-primary-500" />
@@ -37,7 +37,7 @@
             {{ log.resultLabel }}
           </span>
         </div>
-        <div class="flex items-center gap-2 text-slate-400 flex-shrink-0">
+        <div class="flex items-center gap-2 text-slate-400 shrink-0">
           <span>{{ formatTime(log.spunAt) }}</span>
           <button
             @click="store.removeHistoryItem(log.id)"

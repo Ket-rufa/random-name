@@ -69,7 +69,7 @@
             class="flex items-center gap-3 p-3 rounded-2xl border border-slate-100 dark:border-slate-800/80 bg-slate-50/30 dark:bg-slate-900/10 group transition-all duration-200 hover:shadow-sm"
           >
             <!-- Colored dot (or color picker) -->
-            <div class="relative flex-shrink-0">
+            <div class="relative shrink-0">
               <input
                 type="color"
                 :value="store.getEntryColor(index, entry.color)"

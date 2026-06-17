@@ -3,11 +3,11 @@
     <div
       v-if="message"
       :class="[
-        'fixed bottom-6 right-6 z-[9999] flex items-center gap-3 px-5 py-3.5 rounded-2xl shadow-xl border backdrop-blur-md transition-all duration-300 max-w-sm',
+        'fixed bottom-6 right-6 z-9999 flex items-center gap-3 px-5 py-3.5 rounded-2xl shadow-xl border backdrop-blur-md transition-all duration-300 max-w-sm',
         toastClass
       ]"
     >
-      <component :is="icon" class="h-5 w-5 flex-shrink-0" />
+      <component :is="icon" class="h-5 w-5 shrink-0" />
       <span class="text-sm font-medium">{{ message }}</span>
       <button @click="close" class="ml-auto p-0.5 rounded-md hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
         <XIcon class="h-4 w-4 opacity-60 hover:opacity-100" />

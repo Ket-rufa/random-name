@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 /* ====================================================
@@ -6,8 +7,6 @@
    .dark class is present on any ancestor element.
    ==================================================== */
 @variant dark (&:where(.dark, .dark *));
-
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
 @theme {
   --color-primary-50: #f5f3ff;

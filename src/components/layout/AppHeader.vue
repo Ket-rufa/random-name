@@ -5,7 +5,7 @@
       <div class="w-10 h-10 rounded-xl overflow-hidden shadow-lg shadow-purple-500/30 flex items-center justify-center bg-indigo-950">
         <img src="/favicon.svg" alt="Logo" class="w-8 h-8" />
       </div>
-      <h1 class="text-base font-black tracking-tight bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-300 bg-clip-text text-transparent hidden sm:block">
+      <h1 class="text-base font-black tracking-tight bg-linear-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-300 bg-clip-text text-transparent hidden sm:block">
         VÒNG QUAY MAY MẮN
       </h1>
     </div>

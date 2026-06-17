@@ -240,6 +240,84 @@
             />
           </div>
         </div>
+
+        <!-- 4. Contact Info -->
+        <div v-if="activeSubTab === 'contact'" class="space-y-5">
+          <div class="space-y-1">
+            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-200">Liên hệ tác giả</h4>
+            <p class="text-xs text-slate-400 dark:text-slate-500">Góp ý, báo lỗi hoặc hợp tác – đừng ngại liên hệ!</p>
+          </div>
+
+          <div class="grid grid-cols-1 gap-3">
+            <!-- Gmail -->
+            <a
+              href="mailto:nket865@gmail.com"
+              target="_blank"
+              rel="noopener"
+              class="contact-card group flex items-center gap-3 p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-red-400 dark:hover:border-red-500 transition-all duration-200 hover:shadow-md hover:shadow-red-500/10"
+            >
+              <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style="background: linear-gradient(135deg, #ea4335, #fbbc04)">
+                <MailIcon class="h-4 w-4 text-white" />
+              </div>
+              <div class="flex flex-col min-w-0">
+                <span class="text-xs font-semibold text-slate-400 dark:text-slate-500">Gmail</span>
+                <span class="text-sm font-bold text-slate-800 dark:text-slate-200 truncate group-hover:text-red-500 transition-colors">nket865@gmail.com</span>
+              </div>
+              <ExternalLinkIcon class="h-3.5 w-3.5 text-slate-300 dark:text-slate-600 ml-auto shrink-0" />
+            </a>
+
+            <!-- Facebook -->
+            <a
+              href="https://www.facebook.com/ket.nguyenvan.587268"
+              target="_blank"
+              rel="noopener"
+              class="contact-card group flex items-center gap-3 p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-blue-400 dark:hover:border-blue-500 transition-all duration-200 hover:shadow-md hover:shadow-blue-500/10"
+            >
+              <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style="background: linear-gradient(135deg, #1877f2, #42b0ff)">
+                <FacebookIcon class="h-4 w-4 text-white" />
+              </div>
+              <div class="flex flex-col min-w-0">
+                <span class="text-xs font-semibold text-slate-400 dark:text-slate-500">Facebook</span>
+                <span class="text-sm font-bold text-slate-800 dark:text-slate-200 truncate group-hover:text-blue-500 transition-colors">Nguyễn Văn Kết</span>
+              </div>
+              <ExternalLinkIcon class="h-3.5 w-3.5 text-slate-300 dark:text-slate-600 ml-auto shrink-0" />
+            </a>
+
+            <!-- Zalo -->
+            <a
+              href="https://zalo.me/0348644630"
+              target="_blank"
+              rel="noopener"
+              class="contact-card group flex items-center gap-3 p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-sky-400 dark:hover:border-sky-500 transition-all duration-200 hover:shadow-md hover:shadow-sky-500/10"
+            >
+              <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style="background: linear-gradient(135deg, #0068ff, #00aaff)">
+                <MessageCircleIcon class="h-4 w-4 text-white" />
+              </div>
+              <div class="flex flex-col min-w-0">
+                <span class="text-xs font-semibold text-slate-400 dark:text-slate-500">Zalo</span>
+                <span class="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-sky-500 transition-colors">0348 644 630</span>
+              </div>
+              <ExternalLinkIcon class="h-3.5 w-3.5 text-slate-300 dark:text-slate-600 ml-auto shrink-0" />
+            </a>
+
+            <!-- Telegram -->
+            <a
+              href="https://t.me/0348644630"
+              target="_blank"
+              rel="noopener"
+              class="contact-card group flex items-center gap-3 p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-cyan-400 dark:hover:border-cyan-500 transition-all duration-200 hover:shadow-md hover:shadow-cyan-500/10"
+            >
+              <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style="background: linear-gradient(135deg, #26a5e4, #00b4d8)">
+                <SendIcon class="h-4 w-4 text-white" />
+              </div>
+              <div class="flex flex-col min-w-0">
+                <span class="text-xs font-semibold text-slate-400 dark:text-slate-500">Telegram</span>
+                <span class="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-cyan-500 transition-colors">0348 644 630</span>
+              </div>
+              <ExternalLinkIcon class="h-3.5 w-3.5 text-slate-300 dark:text-slate-600 ml-auto shrink-0" />
+            </a>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -256,7 +334,7 @@ import { ref } from 'vue';
 import { useWheelStore } from '../../stores/wheelStore';
 import BaseModal from '../common/BaseModal.vue';
 import BaseButton from '../common/BaseButton.vue';
-import { SettingsIcon, PaletteIcon, MusicIcon, FileQuestionIcon } from 'lucide-vue-next';
+import { SettingsIcon, PaletteIcon, MusicIcon, FileQuestionIcon, MailIcon, FacebookIcon, MessageCircleIcon, SendIcon, ExternalLinkIcon, PhoneIcon } from 'lucide-vue-next';
 import type { WheelSettings } from '../../types/wheel';
 
 defineProps<{
@@ -273,7 +351,8 @@ const activeSubTab = ref<string>('appearance');
 const tabs = [
   { id: 'appearance', label: 'Thiết kế', icon: PaletteIcon },
   { id: 'audio', label: 'Âm thanh', icon: MusicIcon },
-  { id: 'rules', label: 'Quy tắc', icon: FileQuestionIcon }
+  { id: 'rules', label: 'Quy tắc', icon: FileQuestionIcon },
+  { id: 'contact', label: 'Liên hệ', icon: PhoneIcon }
 ];
 
 const themes: { id: WheelSettings['theme']; name: string; colors: string[] }[] = [

@@ -48,7 +48,7 @@
       </div>
 
       <!-- Right Column -->
-      <div class="w-full md:w-[380px] flex flex-col gap-6 h-full min-h-[400px]">
+      <div class="w-full md:w-[400px] flex flex-col gap-6 h-full min-h-[400px]">
         <!-- Entry list (Disabled if not editor) -->
         <EntryEditor class="flex-1 min-h-[250px]" />
         
@@ -64,10 +64,10 @@
 
         <div class="text-center py-6 flex flex-col items-center justify-center gap-4">
           <span class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Lựa chọn trúng giải</span>
-          <h2 class="text-3xl font-black bg-gradient-to-r from-primary-600 to-indigo-500 bg-clip-text text-transparent break-words max-w-full px-4">
+          <h2 class="text-3xl font-black bg-linear-to-r from-primary-600 to-indigo-500 bg-clip-text text-transparent wrap-break-word max-w-full px-4">
             {{ store.selectedResult?.label }}
           </h2>
-          <div class="w-16 h-1 bg-gradient-to-r from-primary-600 to-indigo-500 rounded-full my-2"></div>
+          <div class="w-16 h-1 bg-linear-to-r from-primary-600 to-indigo-500 rounded-full my-2"></div>
         </div>
 
         <template #footer>

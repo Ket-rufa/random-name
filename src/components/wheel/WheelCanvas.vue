@@ -289,40 +289,72 @@ const drawGoldenRing = (
   ctx.lineWidth = 1.5;
   ctx.stroke();
 
-  // === Pearl balls ===
+  // === Pearl balls with flashing effects ===
   const ballOrbitR = outerR - thickness / 2;
   for (let i = 0; i < ballCount; i++) {
     const angle = (i / ballCount) * 2 * Math.PI - Math.PI / 2;
     const bx = cx + Math.cos(angle) * ballOrbitR;
     const by = cy + Math.sin(angle) * ballOrbitR;
 
-    // Ball shadow
-    ctx.save();
-    ctx.shadowColor = 'rgba(0,0,0,0.3)';
-    ctx.shadowBlur = 4;
-    ctx.shadowOffsetY = 2;
+    // Alternating flashing lights: even vs odd index
+    const isLit = (i + flashPhase.value) % 2 === 0;
 
-    // Pearl gradient: white highlight top-left
-    const ballGrad = ctx.createRadialGradient(
-      bx - ballR * 0.35, by - ballR * 0.35, 0,
-      bx, by, ballR
-    );
-    ballGrad.addColorStop(0,   '#ffffff');
-    ballGrad.addColorStop(0.4, '#f8f0d0');
-    ballGrad.addColorStop(0.75,'#deba6a');
-    ballGrad.addColorStop(1,   '#b07d10');
+    if (isLit) {
+      // Light is ON: Bright yellow/white with glow
+      ctx.save();
+      ctx.shadowColor = '#ffe566';
+      ctx.shadowBlur = ballR * 1.5;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 0;
 
+      const ballGrad = ctx.createRadialGradient(
+        bx - ballR * 0.25, by - ballR * 0.25, 0,
+        bx, by, ballR
+      );
+      ballGrad.addColorStop(0, '#ffffff');
+      ballGrad.addColorStop(0.3, '#fff4a3');
+      ballGrad.addColorStop(0.7, '#ffc619');
+      ballGrad.addColorStop(1, '#e68a00');
+
+      ctx.beginPath();
+      ctx.arc(bx, by, ballR, 0, 2 * Math.PI);
+      ctx.fillStyle = ballGrad;
+      ctx.fill();
+      ctx.restore();
+
+      // Bright inner bulb reflection
+      ctx.beginPath();
+      ctx.arc(bx - ballR * 0.3, by - ballR * 0.3, ballR * 0.25, 0, 2 * Math.PI);
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+      ctx.fill();
+    } else {
+      // Light is OFF: Dimmed gold pearl
+      ctx.save();
+      ctx.shadowColor = 'rgba(0,0,0,0.25)';
+      ctx.shadowBlur = 3;
+      ctx.shadowOffsetY = 1.5;
+
+      const ballGrad = ctx.createRadialGradient(
+        bx - ballR * 0.3, by - ballR * 0.3, 0,
+        bx, by, ballR
+      );
+      ballGrad.addColorStop(0, '#fff3cc');
+      ballGrad.addColorStop(0.4, '#dca93a');
+      ballGrad.addColorStop(0.8, '#a67216');
+      ballGrad.addColorStop(1, '#664205');
+
+      ctx.beginPath();
+      ctx.arc(bx, by, ballR, 0, 2 * Math.PI);
+      ctx.fillStyle = ballGrad;
+      ctx.fill();
+      ctx.restore();
+    }
+
+    // Outer rim border for both states
     ctx.beginPath();
     ctx.arc(bx, by, ballR, 0, 2 * Math.PI);
-    ctx.fillStyle = ballGrad;
-    ctx.fill();
-    ctx.restore();
-
-    // Ball rim
-    ctx.beginPath();
-    ctx.arc(bx, by, ballR, 0, 2 * Math.PI);
-    ctx.strokeStyle = 'rgba(180,120,20,0.6)';
-    ctx.lineWidth = 0.8;
+    ctx.strokeStyle = isLit ? 'rgba(255,200,0,0.85)' : 'rgba(120,70,5,0.45)';
+    ctx.lineWidth = 1;
     ctx.stroke();
   }
 
@@ -364,9 +396,29 @@ const drawGoldenRing = (
   ctx.fill();
 };
 
+// Flashing Lights State & Loop
+const flashPhase = ref(0);
+let flashInterval: any = null;
+
+const startFlashing = () => {
+  if (flashInterval) clearInterval(flashInterval);
+  
+  const getSpeed = () => (props.isSpinning ? 100 : 400);
+  
+  flashInterval = setInterval(() => {
+    flashPhase.value = (flashPhase.value + 1) % 2;
+    drawWheel();
+  }, getSpeed());
+};
+
+watch(() => props.isSpinning, () => {
+  startFlashing();
+});
+
 // Lifecycle
 onMounted(() => {
   drawWheel();
+  startFlashing();
   if (canvasRef.value) {
     resizeObserver = new ResizeObserver(() => { drawWheel(); });
     resizeObserver.observe(canvasRef.value);
@@ -375,6 +427,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   if (resizeObserver) resizeObserver.disconnect();
+  if (flashInterval) clearInterval(flashInterval);
 });
 
 watch(() => [props.entries, props.settings], () => { drawWheel(); }, { deep: true });

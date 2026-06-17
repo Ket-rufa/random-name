@@ -18,7 +18,7 @@
     </div>
 
     <!-- Right Column: Entry Editor & History -->
-    <div class="w-full md:w-[480px] flex flex-col gap-6 h-full min-h-[400px]">
+    <div class="w-full md:w-[400px] flex flex-col gap-6 h-full min-h-[400px]">
       <!-- Entry Editor -->
       <EntryEditor class="flex-1 min-h-[250px]" />
       
@@ -41,7 +41,7 @@
           🎉
         </div>
         <span class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Lựa chọn trúng giải</span>
-        <h2 class="text-3xl font-black break-words max-w-full px-4 text-slate-900 dark:text-white">
+        <h2 class="text-3xl font-black wrap-break-word max-w-full px-4 text-slate-900 dark:text-white">
           {{ store.selectedResult?.label }}
         </h2>
         <div
