@@ -2,8 +2,8 @@
   <header class="h-16 px-6 border-b border-slate-100 dark:border-slate-800/60 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md flex items-center justify-between z-40 relative transition-all duration-300">
     <!-- Logo & Brand Title -->
     <div class="flex items-center gap-3 cursor-pointer" @click="goHome">
-      <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-primary-600 to-indigo-500 shadow-md shadow-primary-500/25 flex items-center justify-center text-white font-black text-lg">
-        🎯
+      <div class="w-10 h-10 rounded-xl overflow-hidden shadow-lg shadow-purple-500/30 flex items-center justify-center bg-indigo-950">
+        <img src="/favicon.svg" alt="Logo" class="w-8 h-8" />
       </div>
       <h1 class="text-base font-black tracking-tight bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-300 bg-clip-text text-transparent hidden sm:block">
         VÒNG QUAY MAY MẮN
