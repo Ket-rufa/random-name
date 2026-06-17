@@ -20,7 +20,7 @@
     <!-- Right Column: Entry Editor & History -->
     <div class="w-full md:w-[400px] flex flex-col gap-6 h-full min-h-[400px]">
       <!-- Entry Editor -->
-      <EntryEditor class="flex-1 min-h-[250px]" />
+      <EntryEditor class="flex-1 min-h-[300px]" />
       
       <!-- Spin History -->
       <SpinHistory />

@@ -50,7 +50,7 @@
       <!-- Right Column -->
       <div class="w-full md:w-[400px] flex flex-col gap-6 h-full min-h-[400px]">
         <!-- Entry list (Disabled if not editor) -->
-        <EntryEditor class="flex-1 min-h-[250px]" />
+        <EntryEditor class="flex-1 min-h-[300px]" />
         
         <!-- Local spin history log -->
         <SpinHistory />
