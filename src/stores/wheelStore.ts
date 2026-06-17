@@ -4,7 +4,7 @@ import type { WheelEntry, WheelSettings, SpinHistory, Wheel } from '../types/whe
 import { wheelApi } from '../api/wheelApi';
 
 const THEME_PALETTES: Record<string, string[]> = {
-  default: ['#f43f5e', '#f97316', '#eab308', '#22c55e', '#3b82f6', '#8b5cf6', '#ec4899'],
+  default: ['#f5f5f0', '#00b4d8', '#ffd600', '#9b5de5', '#f72585', '#ff6d00', '#06d6a0', '#ff006e'],
   neon: ['#ff007f', '#39ff14', '#00ffff', '#ff00ff', '#ffff00', '#9d00ff'],
   candy: ['#ff9eb5', '#ffbeb2', '#e2f0cb', '#b5ead7', '#c7ceea', '#ffdac1'],
   pastel: ['#f4a261', '#e76f51', '#2a9d8f', '#e9c46a', '#457b9d', '#a8dadc'],
