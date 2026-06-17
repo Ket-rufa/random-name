@@ -41,10 +41,7 @@
           🎉
         </div>
         <span class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Lựa chọn trúng giải</span>
-        <h2
-          class="text-3xl font-black break-words max-w-full px-4"
-          :style="{ color: winnerColor }"
-        >
+        <h2 class="text-3xl font-black break-words max-w-full px-4 text-slate-900 dark:text-white">
           {{ store.selectedResult?.label }}
         </h2>
         <div
