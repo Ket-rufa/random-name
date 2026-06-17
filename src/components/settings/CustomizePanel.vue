@@ -35,7 +35,7 @@
           
           <!-- Themes -->
           <div class="space-y-2">
-            <span class="text-xs font-semibold text-slate-400 dark:text-slate-500">Chủ đề màu sắc</span>
+            <span class="text-xs font-bold text-slate-700 dark:text-slate-300">Chủ đề màu sắc</span>
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
               <button
                 v-for="theme in themes"
@@ -64,8 +64,8 @@
 
           <!-- Font Size Slider -->
           <div class="space-y-2">
-            <div class="flex justify-between items-center text-xs font-semibold">
-              <label for="font-size-range" class="text-slate-400 dark:text-slate-500">Kích thước chữ vòng quay</label>
+            <div class="flex justify-between items-center text-xs font-bold">
+              <label for="font-size-range" class="text-slate-700 dark:text-slate-300">Kích thước chữ vòng quay</label>
               <span class="text-slate-800 dark:text-slate-200">{{ store.settings.fontSize }}px</span>
             </div>
             <input
@@ -83,7 +83,7 @@
           <div class="flex items-center justify-between py-2">
             <div class="flex flex-col gap-0.5">
               <label for="show-text-switch" class="text-sm font-bold text-slate-800 dark:text-slate-200">Hiển thị chữ trên vòng quay</label>
-              <span class="text-xs text-slate-400 dark:text-slate-500">Ẩn chữ nếu muốn hiển thị vòng quay trơn</span>
+              <span class="text-xs text-slate-500 dark:text-slate-400">Ẩn chữ nếu muốn hiển thị vòng quay trơn</span>
             </div>
             <input
               id="show-text-switch"
