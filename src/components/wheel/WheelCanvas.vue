@@ -115,6 +115,10 @@ const drawWheel = () => {
   canvas.height = height * dpr;
   ctx.scale(dpr, dpr);
 
+  // Ensure smooth text and shape rendering
+  ctx.imageSmoothingEnabled = true;
+  (ctx as any).imageSmoothingQuality = 'high';
+
   const cx = width / 2;
   const cy = height / 2;
 
@@ -214,9 +218,9 @@ const drawWheel = () => {
 
       ctx.fillStyle = isBgDark ? '#ffffff' : '#1e293b';
 
-      // Text shadow for readability
-      ctx.shadowColor = isBgDark ? 'rgba(0,0,0,0.5)' : 'rgba(255,255,255,0.5)';
-      ctx.shadowBlur = 3;
+      // No shadow - shadows cause rough/blurry text
+      ctx.shadowColor = 'transparent';
+      ctx.shadowBlur = 0;
 
       const sizeMultiplier = props.settings.fontSize / 18;
       const calculatedFontSize = Math.max(9, Math.min(20, (wheelRadius / 14) * sizeMultiplier));
@@ -382,7 +386,6 @@ onUnmounted(() => { observer.disconnect(); });
 
 <style scoped>
 canvas {
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
+  /* No crisp-edges — that makes text look rough/pixelated */
 }
 </style>
