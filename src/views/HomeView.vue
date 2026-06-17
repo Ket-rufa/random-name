@@ -18,7 +18,7 @@
     </div>
 
     <!-- Right Column: Entry Editor & History -->
-    <div class="w-full md:w-[380px] flex flex-col gap-6 h-full min-h-[400px]">
+    <div class="w-full md:w-[480px] flex flex-col gap-6 h-full min-h-[400px]">
       <!-- Entry Editor -->
       <EntryEditor class="flex-1 min-h-[250px]" />
       
