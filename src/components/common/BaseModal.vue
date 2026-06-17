@@ -23,7 +23,9 @@
           >
             <h3
               class="text-lg font-bold"
-              :class="headerColor ? 'text-white' : 'text-slate-900 dark:text-white'"
+              :class="headerColor
+                ? (isHeaderDark ? 'text-white' : 'text-slate-900')
+                : 'text-slate-900 dark:text-white'"
             >
               <slot name="title"></slot>
             </h3>
@@ -31,7 +33,9 @@
               @click="close"
               class="p-1.5 rounded-lg transition-colors"
               :class="headerColor
-                ? 'text-white/80 hover:text-white hover:bg-white/20'
+                ? (isHeaderDark
+                  ? 'text-white/80 hover:text-white hover:bg-white/20'
+                  : 'text-slate-650 hover:text-slate-900 hover:bg-slate-900/10')
                 : 'text-slate-400 hover:text-slate-650 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'"
               aria-label="Close modal"
             >
@@ -71,6 +75,20 @@ const props = withDefaults(
   }
 );
 
+const isHeaderDark = computed(() => {
+  if (!props.headerColor) return true;
+  let color = props.headerColor.replace('#', '');
+  if (color.length === 3) {
+    color = color[0] + color[0] + color[1] + color[1] + color[2] + color[2];
+  }
+  if (color.length !== 6) return true;
+  const r = parseInt(color.substring(0, 2), 16);
+  const g = parseInt(color.substring(2, 4), 16);
+  const b = parseInt(color.substring(4, 6), 16);
+  const yiq = (r * 299 + g * 587 + b * 114) / 1000;
+  return yiq < 165;
+});
+
 const emit = defineEmits<{
   (e: 'close'): void;
 }>();
@@ -85,7 +103,7 @@ const handleKeyDown = (e: KeyboardEvent) => {
   }
 };
 
-watch(() => props.isOpen, (newVal) => {
+const watchProp = watch(() => props.isOpen, (newVal) => {
   if (newVal) {
     document.body.classList.add('overflow-hidden');
     window.addEventListener('keydown', handleKeyDown);
