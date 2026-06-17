@@ -1,4 +1,4 @@
-import { ref, readonly, watch } from 'vue';
+import { ref, readonly } from 'vue';
 
 const THEME_KEY = 'vqmm_theme';
 
