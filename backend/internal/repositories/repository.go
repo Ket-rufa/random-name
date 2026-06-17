@@ -16,6 +16,7 @@ type WheelRepository interface {
 	CreateSpinHistory(history *models.SpinHistory) error
 	GetSpinHistory(wheelID uuid.UUID) ([]models.SpinHistory, error)
 	ClearSpinHistory(wheelID uuid.UUID) error
+	RecordVisit(ip string, userAgent string) (int64, error)
 }
 
 type wheelRepository struct {
@@ -85,4 +86,20 @@ func (r *wheelRepository) GetSpinHistory(wheelID uuid.UUID) ([]models.SpinHistor
 
 func (r *wheelRepository) ClearSpinHistory(wheelID uuid.UUID) error {
 	return r.db.Where("wheel_id = ?", wheelID).Delete(&models.SpinHistory{}).Error
+}
+
+func (r *wheelRepository) RecordVisit(ip string, userAgent string) (int64, error) {
+	visit := models.PageView{
+		IP:        ip,
+		UserAgent: userAgent,
+	}
+	if err := r.db.Create(&visit).Error; err != nil {
+		return 0, err
+	}
+
+	var count int64
+	if err := r.db.Model(&models.PageView{}).Count(&count).Error; err != nil {
+		return 0, err
+	}
+	return count, nil
 }

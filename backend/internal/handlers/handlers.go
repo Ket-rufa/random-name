@@ -268,3 +268,17 @@ func (h *WheelHandler) DuplicateWheel(c *fiber.Ctx) error {
 		"editToken": editToken,
 	}, fiber.StatusCreated)
 }
+
+func (h *WheelHandler) RecordVisit(c *fiber.Ctx) error {
+	ip := c.IP()
+	userAgent := c.Get("User-Agent")
+
+	count, err := h.service.RecordVisit(ip, userAgent)
+	if err != nil {
+		return sendError(c, "Failed to record visit", fiber.StatusInternalServerError)
+	}
+
+	return sendSuccess(c, "Visit recorded successfully", fiber.Map{
+		"totalVisits": count,
+	})
+}

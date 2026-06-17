@@ -40,4 +40,7 @@ func SetupRoutes(app *fiber.App, handler *handlers.WheelHandler, frontendURL str
 
 	// Copy action
 	api.Post("/wheels/:id/duplicate", handler.DuplicateWheel)
+
+	// Analytics operations
+	api.Post("/analytics/visit", handler.RecordVisit)
 }

@@ -21,6 +21,7 @@ type WheelService interface {
 	GetHistory(id uuid.UUID) ([]models.SpinHistory, error)
 	ClearHistory(id uuid.UUID, requestToken string) error
 	DuplicateWheel(id uuid.UUID) (*models.Wheel, string, error)
+	RecordVisit(ip string, userAgent string) (int64, error)
 }
 
 type wheelService struct {
@@ -197,4 +198,8 @@ func (s *wheelService) DuplicateWheel(id uuid.UUID) (*models.Wheel, string, erro
 	}
 
 	return s.CreateWheel(srcWheel.Title+" (Bản sao)", srcWheel.Entries, srcWheel.Settings)
+}
+
+func (s *wheelService) RecordVisit(ip string, userAgent string) (int64, error) {
+	return s.repo.RecordVisit(ip, userAgent)
 }

@@ -19,7 +19,7 @@ func ConnectDB(dbURL string) *gorm.DB {
 	log.Println("Database connection established successfully")
 
 	// Trigger GORM AutoMigrate schema sync
-	err = db.AutoMigrate(&models.Wheel{}, &models.WheelEntry{}, &models.SpinHistory{})
+	err = db.AutoMigrate(&models.Wheel{}, &models.WheelEntry{}, &models.SpinHistory{}, &models.PageView{})
 	if err != nil {
 		log.Fatalf("Critical: Failed to run database auto-migration: %v", err)
 	}

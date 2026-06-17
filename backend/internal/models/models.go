@@ -69,3 +69,10 @@ type SpinHistory struct {
 	ResultLabel string     `gorm:"type:varchar(255);not null" json:"resultLabel"`
 	SpunAt      time.Time  `gorm:"autoCreateTime" json:"spunAt"`
 }
+
+type PageView struct {
+	ID        uint      `gorm:"primaryKey;autoIncrement" json:"id"`
+	IP        string    `gorm:"type:varchar(50)" json:"ip"`
+	UserAgent string    `gorm:"type:text" json:"userAgent"`
+	CreatedAt time.Time `gorm:"autoCreateTime" json:"createdAt"`
+}

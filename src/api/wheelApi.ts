@@ -48,5 +48,9 @@ export const wheelApi = {
 
   duplicateWheel(id: string) {
     return httpClient.post(`/wheels/${id}/duplicate`);
+  },
+
+  recordVisit() {
+    return httpClient.post('/analytics/visit');
   }
 };
