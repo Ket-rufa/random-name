@@ -189,6 +189,21 @@
               class="w-9 h-5 bg-slate-200 rounded-full appearance-none checked:bg-primary-600 relative transition-all duration-200 cursor-pointer before:content-[''] before:absolute before:w-4 before:h-4 before:rounded-full before:bg-white before:top-0.5 before:left-0.5 before:transition-all before:duration-200 checked:before:translate-x-4"
             />
           </div>
+
+          <!-- Flashing lights switch -->
+          <div class="flex items-center justify-between py-2">
+            <div class="flex flex-col gap-0.5">
+              <label for="flashing-lights-switch" class="text-sm font-bold text-slate-800 dark:text-slate-200">Hiệu ứng đèn nhấp nháy</label>
+              <span class="text-xs text-slate-400 dark:text-slate-500">Bật/tắt nhấp nháy đèn LED viền ngoài vòng quay</span>
+            </div>
+            <input
+              id="flashing-lights-switch"
+              type="checkbox"
+              :checked="store.settings.enableFlashingLights"
+              @change="(e) => updateSetting('enableFlashingLights', (e.target as HTMLInputElement).checked)"
+              class="w-9 h-5 bg-slate-200 rounded-full appearance-none checked:bg-primary-600 relative transition-all duration-200 cursor-pointer before:content-[''] before:absolute before:w-4 before:h-4 before:rounded-full before:bg-white before:top-0.5 before:left-0.5 before:transition-all before:duration-200 checked:before:translate-x-4"
+            />
+          </div>
         </div>
 
         <!-- 3. Rule Settings -->

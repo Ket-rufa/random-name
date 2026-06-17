@@ -22,6 +22,7 @@ export interface WheelSettings {
   logoUrl?: string;
   showTextOnWheel: boolean;
   fontSize: number; // E.g., 14, 18, 24
+  enableFlashingLights: boolean;
 }
 
 export interface SpinHistory {

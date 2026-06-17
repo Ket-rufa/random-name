@@ -25,7 +25,8 @@ const DEFAULT_SETTINGS: WheelSettings = {
   autoRemoveWinner: false,
   enableWeights: false,
   showTextOnWheel: true,
-  fontSize: 18
+  fontSize: 18,
+  enableFlashingLights: true
 };
 
 const DEFAULT_ENTRIES: string[] = [

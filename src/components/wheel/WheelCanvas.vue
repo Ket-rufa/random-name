@@ -296,66 +296,96 @@ const drawGoldenRing = (
     const bx = cx + Math.cos(angle) * ballOrbitR;
     const by = cy + Math.sin(angle) * ballOrbitR;
 
-    // Alternating flashing lights: even vs odd index
-    const isLit = (i + flashPhase.value) % 2 === 0;
+    if (props.settings.enableFlashingLights) {
+      // Alternating flashing lights: even vs odd index
+      const isLit = (i + flashPhase.value) % 2 === 0;
 
-    if (isLit) {
-      // Light is ON: Bright yellow/white with glow
-      ctx.save();
-      ctx.shadowColor = '#ffe566';
-      ctx.shadowBlur = ballR * 1.5;
-      ctx.shadowOffsetX = 0;
-      ctx.shadowOffsetY = 0;
+      if (isLit) {
+        // Light is ON: Bright yellow/white with glow
+        ctx.save();
+        ctx.shadowColor = '#ffe566';
+        ctx.shadowBlur = ballR * 1.5;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 0;
 
-      const ballGrad = ctx.createRadialGradient(
-        bx - ballR * 0.25, by - ballR * 0.25, 0,
-        bx, by, ballR
-      );
-      ballGrad.addColorStop(0, '#ffffff');
-      ballGrad.addColorStop(0.3, '#fff4a3');
-      ballGrad.addColorStop(0.7, '#ffc619');
-      ballGrad.addColorStop(1, '#e68a00');
+        const ballGrad = ctx.createRadialGradient(
+          bx - ballR * 0.25, by - ballR * 0.25, 0,
+          bx, by, ballR
+        );
+        ballGrad.addColorStop(0, '#ffffff');
+        ballGrad.addColorStop(0.3, '#fff4a3');
+        ballGrad.addColorStop(0.7, '#ffc619');
+        ballGrad.addColorStop(1, '#e68a00');
 
+        ctx.beginPath();
+        ctx.arc(bx, by, ballR, 0, 2 * Math.PI);
+        ctx.fillStyle = ballGrad;
+        ctx.fill();
+        ctx.restore();
+
+        // Bright inner bulb reflection
+        ctx.beginPath();
+        ctx.arc(bx - ballR * 0.3, by - ballR * 0.3, ballR * 0.25, 0, 2 * Math.PI);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+        ctx.fill();
+      } else {
+        // Light is OFF: Dimmed gold pearl
+        ctx.save();
+        ctx.shadowColor = 'rgba(0,0,0,0.25)';
+        ctx.shadowBlur = 3;
+        ctx.shadowOffsetY = 1.5;
+
+        const ballGrad = ctx.createRadialGradient(
+          bx - ballR * 0.3, by - ballR * 0.3, 0,
+          bx, by, ballR
+        );
+        ballGrad.addColorStop(0, '#fff3cc');
+        ballGrad.addColorStop(0.4, '#dca93a');
+        ballGrad.addColorStop(0.8, '#a67216');
+        ballGrad.addColorStop(1, '#664205');
+
+        ctx.beginPath();
+        ctx.arc(bx, by, ballR, 0, 2 * Math.PI);
+        ctx.fillStyle = ballGrad;
+        ctx.fill();
+        ctx.restore();
+      }
+
+      // Outer rim border for flashing states
       ctx.beginPath();
       ctx.arc(bx, by, ballR, 0, 2 * Math.PI);
-      ctx.fillStyle = ballGrad;
-      ctx.fill();
-      ctx.restore();
-
-      // Bright inner bulb reflection
-      ctx.beginPath();
-      ctx.arc(bx - ballR * 0.3, by - ballR * 0.3, ballR * 0.25, 0, 2 * Math.PI);
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-      ctx.fill();
+      ctx.strokeStyle = isLit ? 'rgba(255,200,0,0.85)' : 'rgba(120,70,5,0.45)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
     } else {
-      // Light is OFF: Dimmed gold pearl
+      // Default: Static classic pearls
       ctx.save();
-      ctx.shadowColor = 'rgba(0,0,0,0.25)';
-      ctx.shadowBlur = 3;
-      ctx.shadowOffsetY = 1.5;
+      ctx.shadowColor = 'rgba(0,0,0,0.3)';
+      ctx.shadowBlur = 4;
+      ctx.shadowOffsetY = 2;
 
       const ballGrad = ctx.createRadialGradient(
-        bx - ballR * 0.3, by - ballR * 0.3, 0,
+        bx - ballR * 0.35, by - ballR * 0.35, 0,
         bx, by, ballR
       );
-      ballGrad.addColorStop(0, '#fff3cc');
-      ballGrad.addColorStop(0.4, '#dca93a');
-      ballGrad.addColorStop(0.8, '#a67216');
-      ballGrad.addColorStop(1, '#664205');
+      ballGrad.addColorStop(0,   '#ffffff');
+      ballGrad.addColorStop(0.4, '#f8f0d0');
+      ballGrad.addColorStop(0.75,'#deba6a');
+      ballGrad.addColorStop(1,   '#b07d10');
 
       ctx.beginPath();
       ctx.arc(bx, by, ballR, 0, 2 * Math.PI);
       ctx.fillStyle = ballGrad;
       ctx.fill();
       ctx.restore();
-    }
 
-    // Outer rim border for both states
-    ctx.beginPath();
-    ctx.arc(bx, by, ballR, 0, 2 * Math.PI);
-    ctx.strokeStyle = isLit ? 'rgba(255,200,0,0.85)' : 'rgba(120,70,5,0.45)';
-    ctx.lineWidth = 1;
-    ctx.stroke();
+      // Ball rim
+      ctx.beginPath();
+      ctx.arc(bx, by, ballR, 0, 2 * Math.PI);
+      ctx.strokeStyle = 'rgba(180,120,20,0.6)';
+      ctx.lineWidth = 0.8;
+      ctx.stroke();
+    }
   }
 
   // === Center hub (drawn over segments) ===
@@ -401,7 +431,15 @@ const flashPhase = ref(0);
 let flashInterval: any = null;
 
 const startFlashing = () => {
-  if (flashInterval) clearInterval(flashInterval);
+  if (flashInterval) {
+    clearInterval(flashInterval);
+    flashInterval = null;
+  }
+  
+  if (!props.settings.enableFlashingLights) {
+    drawWheel();
+    return;
+  }
   
   const getSpeed = () => (props.isSpinning ? 100 : 400);
   
@@ -411,7 +449,7 @@ const startFlashing = () => {
   }, getSpeed());
 };
 
-watch(() => props.isSpinning, () => {
+watch(() => [props.isSpinning, props.settings.enableFlashingLights], () => {
   startFlashing();
 });
 
