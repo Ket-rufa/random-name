@@ -33,11 +33,24 @@
       </template>
 
       <div class="text-center py-6 flex flex-col items-center justify-center gap-4">
+        <!-- Winner color swatch -->
+        <div
+          class="w-14 h-14 rounded-full shadow-lg flex items-center justify-center text-2xl"
+          :style="{ backgroundColor: winnerColor, boxShadow: `0 0 24px ${winnerColor}66` }"
+        >
+          🎉
+        </div>
         <span class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Lựa chọn trúng giải</span>
-        <h2 class="text-3xl font-black bg-gradient-to-r from-primary-600 to-indigo-500 bg-clip-text text-transparent break-words max-w-full px-4">
+        <h2
+          class="text-3xl font-black break-words max-w-full px-4"
+          :style="{ color: winnerColor }"
+        >
           {{ store.selectedResult?.label }}
         </h2>
-        <div class="w-16 h-1 bg-gradient-to-r from-primary-600 to-indigo-500 rounded-full my-2"></div>
+        <div
+          class="w-16 h-1.5 rounded-full my-1"
+          :style="{ backgroundColor: winnerColor }"
+        ></div>
       </div>
 
       <template #footer>
@@ -55,7 +68,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue';
+import { computed, onMounted, onUnmounted } from 'vue';
 import { useWheelStore } from '../stores/wheelStore';
 import WheelCanvas from '../components/wheel/WheelCanvas.vue';
 import EntryEditor from '../components/entries/EntryEditor.vue';
@@ -71,6 +84,14 @@ const store = useWheelStore();
 const { rotationAngle, isSpinning, spin, stop } = useWheelAnimation();
 const { playVictory } = useAudio();
 const { fireConfetti } = useConfetti();
+
+// Compute the wheel segment color of the current winner
+const winnerColor = computed(() => {
+  const result = store.selectedResult;
+  if (!result) return '#8b5cf6';
+  const idx = store.entries.findIndex(e => e.id === result.id);
+  return store.getEntryColor(idx >= 0 ? idx : 0, result.color);
+});
 
 const handleSpin = () => {
   if (isSpinning.value) return;
