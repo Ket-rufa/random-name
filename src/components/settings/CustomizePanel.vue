@@ -10,7 +10,7 @@
     <!-- Settings Content with Left Navigation Sidebar -->
     <div class="flex flex-col md:flex-row gap-6 min-h-[350px]">
       <!-- Navigation Menu -->
-      <div class="flex md:flex-col gap-1 border-b md:border-b-0 md:border-r border-slate-100 dark:border-slate-800/60 pb-3 md:pb-0 md:pr-4 md:w-44 flex-shrink-0 overflow-x-auto">
+      <div class="flex md:flex-col gap-1 border-b md:border-b-0 md:border-r border-slate-100 dark:border-slate-800/60 pb-3 md:pb-0 md:pr-4 md:w-44 shrink-0 overflow-x-auto">
         <button
           v-for="tab in tabs"
           :key="tab.id"
