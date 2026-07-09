@@ -69,9 +69,7 @@
 }
 
 /* Layout utilities */
-.content-height {
-  height: calc(100vh - 4rem);
-}
+/* Removed content-height as it was causing the footer to be pushed out of view */
 
 /* Smooth color transitions on theme change */
 *, *::before, *::after {

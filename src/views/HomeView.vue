@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-1 flex flex-col md:flex-row gap-6 p-6 overflow-hidden content-height">
+  <div class="flex-1 flex flex-col md:flex-row gap-6 p-6 overflow-hidden h-full">
     <!-- Left Column: Wheel Canvas & Pointer -->
     <div class="flex-1 flex flex-col items-center justify-center bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800/60 shadow-sm p-6 relative min-h-[380px] transition-all duration-300">
       <div v-if="store.entries.length === 1" class="absolute top-4 px-4 py-1.5 rounded-full bg-amber-50 dark:bg-amber-950/20 border border-amber-250 dark:border-amber-900 text-xs text-amber-700 dark:text-amber-300 font-semibold z-10 flex items-center gap-1.5">

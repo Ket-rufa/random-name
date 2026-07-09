@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-1 flex flex-col md:flex-row gap-6 p-6 overflow-hidden content-height">
+  <div class="flex-1 flex flex-col md:flex-row gap-6 p-6 overflow-hidden h-full">
     <!-- Loading State -->
     <div v-if="store.isLoading" class="flex-1 flex flex-col items-center justify-center bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800/60 shadow-sm p-6 min-h-[400px]">
       <div class="flex flex-col items-center gap-3">
